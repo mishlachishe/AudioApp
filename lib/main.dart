@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
+        fontFamily: "mononoki" //шрифт
       ),
-      //
       home: const FormatsScreen(),
     );
   }

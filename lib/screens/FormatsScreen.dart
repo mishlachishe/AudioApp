@@ -1,14 +1,44 @@
 import 'package:flutter/material.dart';
 
-class FormatsScreen extends StatelessWidget {
+//класс теперь динамический
+class FormatsScreen extends StatefulWidget {
   const FormatsScreen({super.key});
+  @override
+  State<StatefulWidget> createState() {
+    return _FormatsScreenState();
+  }
+}
+
+//отдельное состояние
+class _FormatsScreenState extends State<FormatsScreen> { //stateless -> stateful
+  final List<String> _images = const [
+    "assets/img_mp3.png",
+    "assets/img_wav.png",
+    "assets/img_flac.png",
+    "assets/img_aac.png",
+    "assets/img_ogg.png"
+  ]; //массив из ассетов
+
+  //КАРТИНКИ
+  int _currIdx = 0;
+  void _nextImage() {
+    setState(() {
+      _currIdx = (_currIdx + 1) % 5;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold (
       appBar: AppBar (
         title: const Text(
           "Аудиоформаты",
-          style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.5),
+          style: TextStyle(
+            fontFamily: "mononoki", //кастомный шрифт
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+            fontSize: 24
+          ),
         ),
         centerTitle: false,
         elevation: 0,
@@ -49,15 +79,22 @@ class FormatsScreen extends StatelessWidget {
                   child: _buildCard(
                     context: context,
                     height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.audiotrack, size: 80, color: Colors.green),
-                        const SizedBox(height: 10),
-                      ],
+                    //смена картинки по клику
+                    child: GestureDetector(
+                      onTap: _nextImage,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.asset(
+                          _images[_currIdx],
+                          fit: BoxFit.contain,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
+                      ),
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 16),
                 Expanded(
                   flex: 3,
@@ -74,6 +111,7 @@ class FormatsScreen extends StatelessWidget {
                           _buildItem("2. wav"),
                           _buildItem("3. flac"),
                           _buildItem("4. aac"),
+                          _buildItem("5. ogg")
                         ],
                       ),
                     ),
@@ -81,6 +119,20 @@ class FormatsScreen extends StatelessWidget {
                 ),
               ],
             ),
+
+            const SizedBox(height: 16),
+            //кнопка для переключеня
+            Center(
+              child: ElevatedButton.icon(
+                onPressed: _nextImage,
+                icon: const Icon(Icons.skip_next),
+                label: const Text(
+                  "Следующее изображение",
+                  style: TextStyle(fontFamily: "mononoki", fontSize: 16),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 24),
             Row(
               children: [
