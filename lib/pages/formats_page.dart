@@ -1,3 +1,4 @@
+import 'package:audioapp/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class FormatsScreen extends StatefulWidget {
@@ -65,6 +66,18 @@ class _FormatsScreenState extends State<FormatsScreen> {
         ),
         centerTitle: false,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.greenAccent, size: 28),
+            tooltip: 'Профиль',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfilePage()),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
