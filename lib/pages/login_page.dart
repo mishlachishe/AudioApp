@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import '../routes.dart';
 import '../widgets/text_field.dart';
-import '../pages/formats_page.dart';
-import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -30,10 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   void _submit() {
     if (_formKey.currentState?.validate() ?? false) {
       FocusScope.of(context).unfocus();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const FormatsScreen()),
-      );
+      Navigator.pushReplacementNamed(context, Routes.home);
     }
   }
 
@@ -115,10 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const RegisterPage()),
-                        );
+                        Navigator.pushNamed(context, Routes.register);
                       },
                       child: const Text(
                           "Зарегистрируйтесь",
