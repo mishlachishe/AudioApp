@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../routes.dart';
-import 'profile_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../routes.dart';
+import '../profile_page.dart';
+import 'bloc/audio_formats_bloc.dart';
+import '../../models/audio_format.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,34 +14,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-
-  final List<Map<String, dynamic>> _formatsData = const [
-    {
-      "title": "MP3",
-      "desc": "Сжатый формат, популярный для музыки",
-      "iconBefore": Icons.music_note,
-    },
-    {
-      "title": "WAV",
-      "desc": "Несжатый формат, высокое качество",
-      "iconBefore": Icons.graphic_eq,
-    },
-    {
-      "title": "FLAC",
-      "desc": "Сжатие без потерь качества",
-      "iconBefore": Icons.album,
-    },
-    {
-      "title": "AAC",
-      "desc": "Улучшенное сжатие по сравнению с MP3",
-      "iconBefore": Icons.headphones,
-    },
-    {
-      "title": "OGG",
-      "desc": "Открытый бесплатный формат",
-      "iconBefore": Icons.audiotrack,
-    },
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +53,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildHomeContent() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Адаптивность: если ширина больше 600 - 2 колонки
         final isWideScreen = constraints.maxWidth > 600;
 
         return SingleChildScrollView(
@@ -99,27 +73,46 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20),
 
-              isWideScreen
-                  ? GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 2.5,
-                ),
-                itemCount: _formatsData.length,
-                itemBuilder: (context, index) => _buildCard(index),
-              )
-                  : ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _formatsData.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12.0),
-                  child: _buildCard(index),
-                ),
+              // Использование BlocBuilder для управления состоянием
+              BlocBuilder<AudioFormatsBloc, AudioFormatsState>(
+                builder: (context, state) {
+                  return switch (state) {
+                    AudioFormatsInitial() => const Center(
+                      child: Text('Нажмите для загрузки данных'),
+                    ),
+                    AudioFormatsLoading() => const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: CircularProgressIndicator(color: Colors.greenAccent),
+                      ),
+                    ),
+                    AudioFormatsError(:final message) => Center(
+                      child: Text(message, style: const TextStyle(color: Colors.redAccent)),
+                    ),
+                    AudioFormatsLoaded(:final formats) => isWideScreen
+                        ? GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: 2.5,
+                      ),
+                      itemCount: formats.length,
+                      itemBuilder: (context, index) => _buildCard(formats[index]),
+                    )
+                        : ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: formats.length,
+                      itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 12.0),
+                        child: _buildCard(formats[index]),
+                      ),
+                    ),
+                  };
+                },
               ),
 
               const SizedBox(height: 24),
@@ -158,8 +151,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildCard(int index) {
-    final item = _formatsData[index];
+  Widget _buildCard(AudioFormat item) {
     return Card(
       color: Colors.black26,
       elevation: 4,
@@ -169,18 +161,18 @@ class _HomePageState extends State<HomePage> {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        leading: Icon(item['iconBefore'], color: Colors.greenAccent, size: 32),
+        leading: Icon(item.iconBefore, color: Colors.greenAccent, size: 32),
         title: Text(
-          item['title'],
+          item.title,
           style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.limeAccent, fontSize: 18),
         ),
-        subtitle: Text(item['desc'], style: const TextStyle(color: Colors.white70)),
+        subtitle: Text(item.desc, style: const TextStyle(color: Colors.white70)),
         trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
         onTap: () {
           Navigator.pushNamed(
             context,
             Routes.detail,
-            arguments: item,
+            arguments: item, // Передаем модель
           );
         },
       ),
