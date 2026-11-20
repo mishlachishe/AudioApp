@@ -7,8 +7,11 @@ import 'package:audioapp/pages/register_page.dart';
 import 'package:audioapp/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'injection.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   runApp(const MyApp());
 }
 
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
         Routes.login: (context) => const LoginPage(),
         Routes.register: (context) => const RegisterPage(),
         Routes.home: (context) => BlocProvider(
-          create: (context) => AudioFormatsBloc()..add(const LoadAudioFormatsEvent()),
+          create: (context) => getIt<AudioFormatsBloc>()..add(const LoadAudioFormatsEvent()),
           child: const HomePage(),
         ),
         Routes.detail: (context) => const DetailPage(),

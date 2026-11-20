@@ -28,7 +28,7 @@ class DetailPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.black12),
               ),
-              child: Icon(args.iconBefore, size: 80, color: Colors.greenAccent),
+              child: Image.asset(args.imagePath, height: 200),
             ),
             const SizedBox(height: 24),
             Text(

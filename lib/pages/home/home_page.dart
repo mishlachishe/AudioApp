@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        leading: Icon(item.iconBefore, color: Colors.greenAccent, size: 32),
+        leading: Image.asset(item.imagePath, width: 40, height: 40),
         title: Text(
           item.title,
           style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.limeAccent, fontSize: 18),

@@ -5,26 +5,26 @@ const List<AudioFormat> audioFormatsData = [
   AudioFormat(
     title: "MP3",
     desc: "Сжатый формат, популярный для музыки",
-    iconBefore: Icons.music_note,
+    imagePath: "assets/img_mp3.png",
   ),
   AudioFormat(
     title: "WAV",
     desc: "Несжатый формат, высокое качество",
-    iconBefore: Icons.graphic_eq,
+    imagePath: "assets/img_wav.png",
   ),
   AudioFormat(
     title: "FLAC",
     desc: "Сжатие без потерь качества",
-    iconBefore: Icons.album,
+    imagePath: "assets/img_flac.png",
   ),
   AudioFormat(
     title: "AAC",
     desc: "Улучшенное сжатие по сравнению с MP3",
-    iconBefore: Icons.headphones,
+    imagePath: "assets/img_aac.png",
   ),
   AudioFormat(
     title: "OGG",
     desc: "Открытый бесплатный формат",
-    iconBefore: Icons.audiotrack,
+    imagePath: "assets/img_ogg.png",
   ),
 ];
