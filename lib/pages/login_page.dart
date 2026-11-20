@@ -51,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
                     fontFamily: "mononoki",
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
                     letterSpacing: 1.0,
                   ),
                 ),
@@ -60,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   inputType: InputFieldType.email,
                   labelText: "Email",
                   hintText: "example@mail.com",
-                  prefixIcon: const Icon(Icons.email, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.email),
                   controller: _emailController,
                   focusNode: _emailFocus,
                   onFieldSubmitted: () => _passwordFocus.requestFocus(),
@@ -70,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                   inputType: InputFieldType.password,
                   labelText: "Пароль",
                   hintText: "Введите пароль",
-                  prefixIcon: const Icon(Icons.lock, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.lock),
                   controller: _passwordController,
                   focusNode: _passwordFocus,
                   onFieldSubmitted: _submit,
@@ -81,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {},
                     child: const Text(
                       "Забыли пароль?",
-                      style: TextStyle(fontFamily: "mononoki", color: Colors.white54),
+                      style: TextStyle(fontFamily: "mononoki"),
                     ),
                   ),
                 ),
@@ -89,8 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.greenAccent,
-                    foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     textStyle: const TextStyle(
@@ -107,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     const Text(
                         "Нет аккаунта? ",
-                        style: TextStyle(fontFamily: "mononoki", color: Colors.white70)
+                        style: TextStyle(fontFamily: "mononoki")
                     ),
                     TextButton(
                       onPressed: () {
@@ -115,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: const Text(
                           "Зарегистрируйтесь",
-                          style: TextStyle(fontFamily: "mononoki", color: Colors.limeAccent)
+                          style: TextStyle(fontFamily: "mononoki")
                       ),
                     ),
                   ],

@@ -38,7 +38,7 @@ class DetailPage extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               args.desc,
-              style: const TextStyle(fontSize: 18, color: Colors.white70),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),

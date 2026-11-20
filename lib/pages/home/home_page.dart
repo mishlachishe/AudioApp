@@ -1,3 +1,4 @@
+import 'package:audioapp/theme/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../routes.dart';
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
           "АУДИОФОРМАТЫ",
           style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.5),
         ),
+        actions: const [
+          ThemeToggleAction(),
+        ],
       ),
       body: _selectedIndex == 0 ? _buildHomeContent() : const ProfilePage(),
       bottomNavigationBar: NavigationBar(
@@ -32,17 +36,15 @@ class _HomePageState extends State<HomePage> {
             _selectedIndex = index;
           });
         },
-        backgroundColor: Colors.black45,
-        indicatorColor: Colors.greenAccent.withOpacity(0.3),
         destinations: const [
           NavigationDestination(
             icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home, color: Colors.greenAccent),
+            selectedIcon: Icon(Icons.home),
             label: 'Главная',
           ),
           NavigationDestination(
             icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person, color: Colors.greenAccent),
+            selectedIcon: Icon(Icons.person),
             label: 'Профиль',
           ),
         ],
@@ -69,7 +71,7 @@ class _HomePageState extends State<HomePage> {
               const Text(
                 "Описание: Приложение для изучения популярных форматов аудиофайлов.",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.white70),
+                style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
 
@@ -83,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                     AudioFormatsLoading() => const Center(
                       child: Padding(
                         padding: EdgeInsets.all(32.0),
-                        child: CircularProgressIndicator(color: Colors.greenAccent),
+                        child: CircularProgressIndicator(),
                       ),
                     ),
                     AudioFormatsError(:final message) => Center(
@@ -125,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                       border: Border.all(color: Colors.black12),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: const Icon(Icons.person, size: 32, color: Colors.white),
+                    child: const Icon(Icons.person, size: 32),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -137,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: const Text(
                         "Клейменов М.Д. Группа: ИКБО-65-23",
-                        style: TextStyle(fontSize: 16, color: Colors.green),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
@@ -153,26 +155,20 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildCard(AudioFormat item) {
     return Card(
-      color: Colors.black26,
-      elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: const BorderSide(color: Colors.black12),
-      ),
-      child: ListTile(
+       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         leading: Image.asset(item.imagePath, width: 40, height: 40),
         title: Text(
           item.title,
-          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.limeAccent, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        subtitle: Text(item.desc, style: const TextStyle(color: Colors.white70)),
-        trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+        subtitle: Text(item.desc),
+        trailing: const Icon(Icons.arrow_forward_ios),
         onTap: () {
           Navigator.pushNamed(
             context,
             Routes.detail,
-            arguments: item, // Передаем модель
+            arguments: item,
           );
         },
       ),

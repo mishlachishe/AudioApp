@@ -78,7 +78,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           : TextInputType.text,
       style: const TextStyle(
         fontFamily: "mononoki",
-        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
       decoration: InputDecoration(
@@ -89,15 +88,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           fontSize: 16,
         ),
         hintText: widget.hintText,
-        hintStyle: const TextStyle(fontFamily: "mononoki", color: Colors.white30),
+        hintStyle: const TextStyle(fontFamily: "mononoki"),
         prefixIcon: widget.prefixIcon,
         filled: true,
-        fillColor: Colors.black26,
         suffixIcon: isPassword
             ? IconButton(
           icon: Icon(
             _hidePassword ? Icons.visibility : Icons.visibility_off,
-            color: Colors.greenAccent,
+
           ),
           onPressed: () {
             setState(() => _hidePassword = !_hidePassword);

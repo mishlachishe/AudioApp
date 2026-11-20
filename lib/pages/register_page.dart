@@ -53,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.greenAccent),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
@@ -80,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputType: InputFieldType.name,
                   labelText: "ФИО",
                   hintText: "Иванов Иван Иванович",
-                  prefixIcon: const Icon(Icons.person, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.person),
                   controller: _nameController,
                   focusNode: _nameFocus,
                   onFieldSubmitted: () => _emailFocus.requestFocus(),
@@ -90,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputType: InputFieldType.email,
                   labelText: "Email",
                   hintText: "example@mail.com",
-                  prefixIcon: const Icon(Icons.email, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.email),
                   controller: _emailController,
                   focusNode: _emailFocus,
                   onFieldSubmitted: () => _passwordFocus.requestFocus(),
@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputType: InputFieldType.password,
                   labelText: "Пароль",
                   hintText: "Мин. 6 символов, буквы, цифры, +_-",
-                  prefixIcon: const Icon(Icons.lock, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.lock),
                   controller: _passwordController,
                   focusNode: _passwordFocus,
                   onFieldSubmitted: () => _confirmFocus.requestFocus(),
@@ -110,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   inputType: InputFieldType.confirmPassword,
                   labelText: "Повторите пароль",
                   hintText: "Повторите пароль",
-                  prefixIcon: const Icon(Icons.lock_outline, color: Colors.greenAccent),
+                  prefixIcon: const Icon(Icons.lock_outline),
                   controller: _confirmPasswordController,
                   passwordController: _passwordController,
                   focusNode: _confirmFocus,
@@ -120,8 +120,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   onPressed: _submit,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.greenAccent,
-                    foregroundColor: Colors.black,
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     textStyle: const TextStyle(
@@ -138,13 +136,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     const Text(
                         "Уже есть аккаунт? ",
-                        style: TextStyle(fontFamily: "mononoki", color: Colors.white70)
+                        style: TextStyle(fontFamily: "mononoki")
                     ),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: const Text(
                           "Войдите",
-                          style: TextStyle(fontFamily: "mononoki", color: Colors.limeAccent)
+                          style: TextStyle(fontFamily: "mononoki")
                       ),
                     ),
                   ],

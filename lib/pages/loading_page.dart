@@ -22,7 +22,6 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +35,6 @@ class _LoadingPageState extends State<LoadingPage> {
               child: const Icon(
                 Icons.audiotrack,
                 size: 80,
-                color: Colors.greenAccent,
               ),
             ),
             const SizedBox(height: 40),
@@ -45,7 +43,6 @@ class _LoadingPageState extends State<LoadingPage> {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
                 letterSpacing: 2.0,
               ),
             ),
